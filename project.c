@@ -16,6 +16,7 @@
 RT_TASK ir;
 RT_TASK humitemp;
 RT_TASK encoder;
+RT_TASK dummy;
 
 unsigned char last_enc_status;
 unsigned char flag;
@@ -43,6 +44,7 @@ void read_encoder() {
     // Set task to be periodic every 15ms
     static int count;
     static int prev;
+    // 50ms period for this task.
     rt_task_set_periodic(&encoder, TM_NOW, rt_timer_ns2ticks(5e7));
     while (1) {
         int error_code = rt_task_wait_period(NULL); // wait for the next period to run the following
@@ -80,7 +82,7 @@ void init_encoder() {
 
 /* Dummy function for learning how to program periodic tasks in Xenomai 3 */
 void dummy_func() {
-    rt_task_set_periodic(&encoder, TM_NOW, rt_timer_ns2ticks(1.5e8));
+    rt_task_set_periodic(&dummy, TM_NOW, rt_timer_ns2ticks(7e6));
     while (1) {
         int error = rt_task_wait_period(NULL);
         if (error) printf("Error on rt_task_wait_period, %s\n", strerror(-error));
@@ -99,15 +101,17 @@ int main(int argc, char* argv[]) {
     //rt_task_set_periodic(&ir, TM_NOW, rt_timer_ns2ticks(15000));
    //  rt_task_start(&ir, &readISR, NULL);
 
-    rt_task_create(&encoder, "Encoder", 0, 50, 0);
-    //rt_task_start(&encoder, &read_encoder, 0);
+    rt_task_create(&encoder, "Encoder", 0, 99, 0);
     rt_task_start(&encoder, &read_encoder, NULL);
+
+    rt_task_create(&dummy, "Dummy", 0, 98, 0);
+    rt_task_start(&dummy, &dummy_func, NULL);
        while(1) {
-    //    static time_t t_start = 0;
-    //   struct timespec ts;
-    //    clock_gettime(CLOCK_REALTIME, &ts);
-    //    if (t_start == 0) t_start = ts.tv_sec;
-    //    timer = (float) (ts.tv_sec - t_start) + ts.tv_nsec * 1.0e-9;
+        static time_t t_start = 0;
+        struct timespec ts;
+        clock_gettime(CLOCK_REALTIME, &ts);
+        if (t_start == 0) t_start = ts.tv_sec;
+        timer = (float) (ts.tv_sec - t_start) + ts.tv_nsec * 1.0e-9;
     }
     return 0;
 }
