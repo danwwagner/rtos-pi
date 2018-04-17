@@ -22,7 +22,7 @@ int main(void)
 		return 1;
 	}
 
-	//pinMode(IR, INPUT);
+	pinMode(IR, INPUT);
 
 	while(1);
 	
