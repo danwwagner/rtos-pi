@@ -18,11 +18,9 @@
 #define DHTPIN 4
 
 // Tasks 
-RT_TASK ir;
 RT_TASK humitemp;
 RT_TASK encoder;
 
-RTIME ir_period = 1e9;
 RTIME humitemp_period = 1e8;
 RTIME encoder_period = 5e6;
 
@@ -39,15 +37,18 @@ float timer = 0;
 float last_timer = 0;
 int count, prev;
 
-/* Attemps to accept IR data every 70 ms. */
-static void read_ir() {
-    rt_task_set_periodic(NULL, TM_NOW, rt_timer_ns2ticks(ir_period)); // 70ms period
-    while (1) {
-        printf("Received IR\n");
-        rt_task_wait_period(NULL);
-    }
-}
+void quit(int signal) {
+    // Suspend tasks, then delete them.
+    rt_task_suspend(&humitemp);
+    rt_task_suspend(&encoder);
 
+    printf("Tasks suspended. Deleting...\n");
+    rt_task_delete(&humitemp);
+    rt_task_delete(&encoder);
+
+    printf("Tasks deleted. Exiting...\n");
+    exit(0);
+}
 /* Attempts to read the encoder data every 50 ms. */
 static void read_encoder() {
     rt_task_set_periodic(NULL, TM_NOW, rt_timer_ns2ticks(encoder_period));  //50ms period
@@ -137,14 +138,6 @@ static void read_temp() {
         if (error_code) { printf("Error from rt_task_wait_period for read_encoder %s\n", strerror(-error_code)); }
     }
 }
- 
-/* Initializes the ISR for the Infrared Sensor. */
-void init_ir() {
-    pinMode(IR_PIN, INPUT);
-    if (wiringPiISR(IR_PIN, INT_EDGE_FALLING, &read_ir) == -1) {
-        printf("ISR setup failure!");
-    }
-}
 
 /* Initializes the ISR for the Encoder. */
 void init_encoder() {
@@ -158,40 +151,21 @@ void init_encoder() {
     }
 }
 
-/* Dummy function for learning how to program periodic tasks in Xenomai 3 */
-/*void dummy_func() {
-    rt_task_set_periodic(&dummy, TM_NOW, rt_timer_ns2ticks(7e6));
-    while (1) {
-        int error = rt_task_wait_period(NULL);
-        if (error) printf("Error on rt_task_wait_period, %s\n", strerror(-error));
-        printf("Time diff: %.2f\n", timer - last_timer);
-        last_timer = timer;
-    }
-}
-*/
 int main(int argc, char* argv[]) {
+    signal(SIGINT, quit);
     printf("Initializing tasks.\n");
     if (wiringPiSetup() < 0) printf("WiringPi setup error\n");
     init_encoder();
-    //init_ir();
     printf("Initialization complete.\n");
 
     // &task, name, stack size, priority, mode);
- //    rt_task_create(&ir, "IR", 0, 49, 0); 
- //    rt_task_start(&ir, &read_ir, 0);
 
      rt_task_create(&encoder, "Encoder", 10, 50, 0);
      rt_task_start(&encoder, &read_encoder, 0);
 
      rt_task_create(&humitemp, "Humitemp", 0, 49, 0);
      rt_task_start(&humitemp, &read_temp, 0);
-     while(1) {
-      /*  static time_t t_start = 0;
-        struct timespec ts;
-        clock_gettime(CLOCK_REALTIME, &ts);
-        if (t_start == 0) t_start = ts.tv_sec;
-        timer = (float) (ts.tv_sec - t_start) + ts.tv_nsec * 1.0e-9; */
-    } 
+     while(1); 
     return 0;
 }
 
