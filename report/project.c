@@ -159,7 +159,7 @@ int main(int argc, char* argv[]) {
 
     // &task, name, stack size, priority, mode);
 
-     rt_task_create(&encoder, "Encoder", 10, 50, 0);
+     rt_task_create(&encoder, "Encoder", 0, 50, 0);
      rt_task_start(&encoder, &read_encoder, 0);
 
      rt_task_create(&humitemp, "Humitemp", 0, 49, 0);

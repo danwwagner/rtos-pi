@@ -10,10 +10,11 @@
 \usepackage{float}
 \usepackage{array}
 \usepackage{verbatim}
+\usepackage{siunitx}
 \addbibresource{bibliography.bib}
 \setlength\bibitemsep{2\itemsep}
 
-
+% NOTE: FOUR PAGES OF CODE
 \begin{document}
 	\begin{titlepage}
 		\centering
@@ -107,20 +108,18 @@ One process represented the Raspberry Pi, with the encoder and DHT11 being addit
 
 \indent Three queries were used to verify these characteristics.  First, $E <> Encode.x > 5$ would test for a failure with the encoder.  Next, $E <> HumiTemp.x > 100$ would test for DHT11 failures.  Finally, $A[] not System.BAD and not Encode.BAD and not HumiTemp.BAD$ tested for a system failure, with both sensors failing within the same reading cycle.  UPPAAL's verifier returned that each of these queries were satisfied, so the system had no faults that could occur.
 
-Once hardware connections were established and real-time constraints were verified, the software needed to interface with each device.  This was made possible using the WiringPi library (\cite{gordonhenderson2018}).  The GPIO designations in Figure \ref{fig:GPIO} were not the same as WiringPi used.  Figure \ref{fig:pinouts} shows these obvious differences. The software refers to each pin by its WiringPi number.  For the rotary encoder, the Clock, Data, and Switch pins were referred to as pins 1, 2, and 3 respectively.  The DHT11's Data pin was denoted as pin 4.  WiringPi used these numbers to interface with the Raspberry Pi through wiringPiSetup().  This function initialized the system to use its numbering scheme and allowed the data to be accessed on those pins.
-
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=10cm,height=10cm,keepaspectratio]{pi_pins.png}
 	\caption[Pinouts]{WiringPi Pinouts. Courtesy of Wiringpi.com.}
 	\label{fig:pinouts}
 \end{figure}
-~\newline
 
-% UPPAAL model here
-% Encoder ISR
-% DHT11 ISR, checksum delay
-% WiringPi
+Once hardware connections were established and real-time constraints were verified, the software needed to interface with each device.  This was made possible using the WiringPi library (\cite{gordonhenderson2018}).  The GPIO designations in Figure \ref{fig:GPIO} were not the same as WiringPi used.  Figure \ref{fig:pinouts} shows these obvious differences. The software refers to each pin by its WiringPi number.  For the rotary encoder, the Clock, Data, and Switch pins were referred to as pins 1, 2, and 3 respectively.  The DHT11's Data pin was denoted as pin 4.  WiringPi used these numbers to interface with the Raspberry Pi through wiringPiSetup().  This function initialized the system to use its numbering scheme and allowed the data to be accessed on those pins.  Additionally, wiringPiISR() was used to initialize the encoder's ISR, which was not run until the task was released for running.
+
+Xenomai's API was utilized to create and initialize the tasks.  First, rt\textunderscore task\textunderscore create() was called to make each sensor reading a task: each was given a task object, the sensor name, a stack size, priority, and mode (\cite{xenomai2018}).  The stack size and mode were set to their defaults (0, 0), and the DHT11 was given a higher priority than the encoder due to its significantly higher delay time.  After task creation, each task was started by rt\textunderscore task\textunderscore start(), which was given the task, its function starting point, and any arguments (\cite{xenomai2018}).  The arguments were default set to 0; DHT11's starting point was the read\textunderscore temp() function, and the encoder started within its ISR, read\textunderscore encoder().
+
+\indent Within the starting functions, two additional Xenomai routines were used to ensure periodic scheduling: rt\textunderscore task\textunderscore set\textunderscore periodic() and rt\textunderscore task\textunderscore wait\textunderscore period().  First, the task was set to be periodic with a given period starting at sensor task's invocation, defined as the constant TM\textunderscore NOW (\cite{xenomai2018}).  These periods were defined in nanoseconds, as the period must be converted to ticks via rt\textunderscore timer\textunderscore ns2ticks() (\cite{xenomai2018}).  As a result, the encoder's period was \SI{5e6} ns and the DHT11's was \SI{1e8} ns.  After making each task periodic, its code segment would run.  Following this, the sensors would be put to sleep (by using rt\textunderscore task\textunderscore wait\textunderscore period() to wait) until their next scheduled time slot, which is when Xenomai would re-execute this cycle.
 ~\newpage
 \section{Experimental Results}
 ~\newpage
