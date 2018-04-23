@@ -1,0 +1,176 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.9 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{apa/global//global/global}
+    \entry{artofcircuits2018}{online}{}
+      \name{author}{1}{}{%
+        {{uniquename=0,uniquepart=base,hash=89c92321f3df1838791ca66c682c40db}{%
+           family={ArtOfCircuits},
+           familyi={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{89c92321f3df1838791ca66c682c40db}
+      \strng{fullhash}{89c92321f3df1838791ca66c682c40db}
+      \strng{bibnamehash}{89c92321f3df1838791ca66c682c40db}
+      \strng{authorbibnamehash}{89c92321f3df1838791ca66c682c40db}
+      \strng{authornamehash}{89c92321f3df1838791ca66c682c40db}
+      \strng{authorfullhash}{89c92321f3df1838791ca66c682c40db}
+      \field{sortinit}{A}
+      \field{sortinithash}{3248043b5fe8d0a34dab5ab6b8d4309b}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{4}
+      \field{title}{Encoder Module KY-040}
+      \field{year}{2018}
+      \verb{urlraw}
+      \verb http://artofcircuits.com/product/encoder-module-ky-040
+      \endverb
+      \verb{url}
+      \verb http://artofcircuits.com/product/encoder-module-ky-040
+      \endverb
+    \endentry
+    \entry{raspberrypifoundation2018}{online}{}
+      \name{author}{1}{}{%
+        {{uniquename=0,uniquepart=base,hash=cfc124424a21c596c14a4cb50ebc8d89}{%
+           family={Foundation},
+           familyi={F\bibinitperiod},
+           given={Raspberry\bibnamedelima Pi},
+           giveni={R\bibinitperiod\bibinitdelim P\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{cfc124424a21c596c14a4cb50ebc8d89}
+      \strng{fullhash}{cfc124424a21c596c14a4cb50ebc8d89}
+      \strng{bibnamehash}{cfc124424a21c596c14a4cb50ebc8d89}
+      \strng{authorbibnamehash}{cfc124424a21c596c14a4cb50ebc8d89}
+      \strng{authornamehash}{cfc124424a21c596c14a4cb50ebc8d89}
+      \strng{authorfullhash}{cfc124424a21c596c14a4cb50ebc8d89}
+      \field{sortinit}{F}
+      \field{sortinithash}{276475738cc058478c1677046f857703}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{4}
+      \field{title}{Raspbery Pi 3 Specifications}
+      \field{year}{2018}
+      \verb{urlraw}
+      \verb https://www.raspberrypi.org/products/raspberry-pi-3-model-b/
+      \endverb
+      \verb{url}
+      \verb https://www.raspberrypi.org/products/raspberry-pi-3-model-b/
+      \endverb
+    \endentry
+    \entry{gordonhenderson2018}{online}{}
+      \name{author}{1}{}{%
+        {{uniquename=0,uniquepart=base,hash=e5e3c9a5bbd19acadc395cb4dbc117ae}{%
+           family={Henderson},
+           familyi={H\bibinitperiod},
+           given={Gordon},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{e5e3c9a5bbd19acadc395cb4dbc117ae}
+      \strng{fullhash}{e5e3c9a5bbd19acadc395cb4dbc117ae}
+      \strng{bibnamehash}{e5e3c9a5bbd19acadc395cb4dbc117ae}
+      \strng{authorbibnamehash}{e5e3c9a5bbd19acadc395cb4dbc117ae}
+      \strng{authornamehash}{e5e3c9a5bbd19acadc395cb4dbc117ae}
+      \strng{authorfullhash}{e5e3c9a5bbd19acadc395cb4dbc117ae}
+      \field{sortinit}{H}
+      \field{sortinithash}{2f664b453ec75da1fe3804ca92633405}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{4}
+      \field{title}{WiringPi}
+      \field{year}{2018}
+      \verb{urlraw}
+      \verb http://wiringpi.com/
+      \endverb
+      \verb{url}
+      \verb http://wiringpi.com/
+      \endverb
+    \endentry
+    \entry{sunfounder2018}{online}{}
+      \name{author}{1}{}{%
+        {{uniquename=0,uniquepart=base,hash=76e2c63b62c0dc4d3756aec546f312a8}{%
+           family={Sunfounder},
+           familyi={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{76e2c63b62c0dc4d3756aec546f312a8}
+      \strng{fullhash}{76e2c63b62c0dc4d3756aec546f312a8}
+      \strng{bibnamehash}{76e2c63b62c0dc4d3756aec546f312a8}
+      \strng{authorbibnamehash}{76e2c63b62c0dc4d3756aec546f312a8}
+      \strng{authornamehash}{76e2c63b62c0dc4d3756aec546f312a8}
+      \strng{authorfullhash}{76e2c63b62c0dc4d3756aec546f312a8}
+      \field{sortinit}{S}
+      \field{sortinithash}{3c1547c63380458f8ca90e40ed14b83e}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{4}
+      \field{title}{Sunfounder SensorKit for RPi2}
+      \field{year}{2018}
+      \verb{urlraw}
+      \verb https://github.com/sunfounder/SunFounder_SensorKit_for_RPi2
+      \endverb
+      \verb{url}
+      \verb https://github.com/sunfounder/SunFounder_SensorKit_for_RPi2
+      \endverb
+    \endentry
+    \entry{xenomai2018}{online}{}
+      \name{author}{1}{}{%
+        {{uniquename=0,uniquepart=base,hash=24223eafac17bc1f70769391289cc1d4}{%
+           family={Xenomai},
+           familyi={X\bibinitperiod}}}%
+      }
+      \strng{namehash}{24223eafac17bc1f70769391289cc1d4}
+      \strng{fullhash}{24223eafac17bc1f70769391289cc1d4}
+      \strng{bibnamehash}{24223eafac17bc1f70769391289cc1d4}
+      \strng{authorbibnamehash}{24223eafac17bc1f70769391289cc1d4}
+      \strng{authornamehash}{24223eafac17bc1f70769391289cc1d4}
+      \strng{authorfullhash}{24223eafac17bc1f70769391289cc1d4}
+      \field{sortinit}{X}
+      \field{sortinithash}{755b54a59c4b54d471c87a4486a94349}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{4}
+      \field{title}{Xenomai Task Management Services}
+      \field{year}{2018}
+      \verb{urlraw}
+      \verb https://xenomai.org/documentation/xenomai-3/html/xeno3prm/group__alchemy__task.html
+      \endverb
+      \verb{url}
+      \verb https://xenomai.org/documentation/xenomai-3/html/xeno3prm/group__alchemy__task.html
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

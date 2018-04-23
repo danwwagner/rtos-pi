@@ -3,4 +3,14 @@
 /*
 
 */
+E<> Encode.x > 5
+
+/*
+
+*/
+E<> HumiTemp.x > 100
+
+/*
+
+*/
 A[] not System.BAD and not Encode.BAD and not HumiTemp.BAD
