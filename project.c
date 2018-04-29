@@ -165,6 +165,6 @@ int main(int argc, char* argv[]) {
      rt_task_create(&humitemp, "Humitemp", 0, 49, 0);
      rt_task_start(&humitemp, &read_temp, 0);
      while(1); 
-    return 0;
+     return 0;
 }
 
