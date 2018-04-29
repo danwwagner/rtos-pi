@@ -2077,11 +2077,12 @@
     <bcf:citekey order="2">xenomai2018</bcf:citekey>
     <bcf:citekey order="3">artofcircuits2018</bcf:citekey>
     <bcf:citekey order="4">sunfounder2018</bcf:citekey>
-    <bcf:citekey order="5">gordonhenderson2018</bcf:citekey>
-    <bcf:citekey order="6">xenomai2018</bcf:citekey>
+    <bcf:citekey order="5">sunfounder2018</bcf:citekey>
+    <bcf:citekey order="6">gordonhenderson2018</bcf:citekey>
     <bcf:citekey order="7">xenomai2018</bcf:citekey>
     <bcf:citekey order="8">xenomai2018</bcf:citekey>
     <bcf:citekey order="9">xenomai2018</bcf:citekey>
+    <bcf:citekey order="10">xenomai2018</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="apa">

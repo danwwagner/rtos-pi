@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2018.3.7)  29 APR 2018 14:22
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2018.3.7)  29 APR 2018 16:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1341,7 +1341,7 @@ File: siunitx-abbreviations.cfg 2017/11/26 v2.7k siunitx: Abbreviated units
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 40--42
+Underfull \hbox (badness 10000) in paragraph at lines 42--44
 
  []
 
@@ -1349,16 +1349,16 @@ Underfull \hbox (badness 10000) in paragraph at lines 40--42
 <pi_GPIO.png, id=11, 536.0025pt x 181.67876pt>
 File: pi_GPIO.png Graphic file (type png)
 <use pi_GPIO.png>
-Package pdftex.def Info: pi_GPIO.png  used on input line 73.
+Package pdftex.def Info: pi_GPIO.png  used on input line 75.
 (pdftex.def)             Requested size: 284.52162pt x 96.43896pt.
  [2 <./pi_GPIO.png>]
 <circuit.jpg, id=15, 4047.12pt x 3035.34pt>
 File: circuit.jpg Graphic file (type jpg)
 <use circuit.jpg>
-Package pdftex.def Info: circuit.jpg  used on input line 87.
+Package pdftex.def Info: circuit.jpg  used on input line 89.
 (pdftex.def)             Requested size: 284.50067pt x 213.3755pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 91--92
+Underfull \hbox (badness 10000) in paragraph at lines 94--97
 
  []
 
@@ -1366,54 +1366,23 @@ Underfull \hbox (badness 10000) in paragraph at lines 91--92
 <system.png, id=19, 869.2475pt x 300.12125pt>
 File: system.png Graphic file (type png)
 <use system.png>
-Package pdftex.def Info: system.png  used on input line 103.
+Package pdftex.def Info: system.png  used on input line 107.
 (pdftex.def)             Requested size: 284.53142pt x 98.2389pt.
 <pi_pins.png, id=20, 611.28375pt x 313.17pt>
 File: pi_pins.png Graphic file (type png)
 <use pi_pins.png>
-Package pdftex.def Info: pi_pins.png  used on input line 113.
+Package pdftex.def Info: pi_pins.png  used on input line 117.
 (pdftex.def)             Requested size: 284.52382pt x 145.76588pt.
- [4 <./system.png> <./pi_pins.png>] [5] [6] [7] [8]
-File: project.c  (verbatim)
- [9]
-Overfull \hbox (79.82025pt too wide) in paragraph at lines 135--135
-[]    \OT1/cmtt/m/n/12 rt_task_set_periodic(NULL, TM_NOW, rt_timer_ns2ticks(enc
-oder_period));  //50ms period[] 
- []
-
-
-Overfull \hbox (42.77023pt too wide) in paragraph at lines 135--135
-[]        \OT1/cmtt/m/n/12 rt_task_wait_period(NULL); // wait for the next peri
-od to run the following[] 
- []
-
-
-Overfull \hbox (73.64525pt too wide) in paragraph at lines 135--135
-[]    \OT1/cmtt/m/n/12 rt_task_set_periodic(NULL, TM_NOW, rt_timer_ns2ticks(hum
-itemp_period)); // 1s period[] 
- []
-
-[10] [11]
-Overfull \hbox (147.74529pt too wide) in paragraph at lines 135--135
-[]        \OT1/cmtt/m/n/12 int error_code = rt_task_wait_period(NULL); // wait 
-for the next period to run the following[] 
- []
-
-
-Overfull \hbox (234.19533pt too wide) in paragraph at lines 135--135
-[]        \OT1/cmtt/m/n/12 if (error_code) { printf("Error from rt_task_wait_pe
-riod for read_encoder %s\n", strerror(-error_code)); }[] 
- []
-
-[12] (./report.aux)
+ [4 <./system.png>] [5 <./pi_pins.png>] [6] [7]
+(./report.aux)
 Package logreq Info: Writing requests to 'report.run.xml'.
 \openout1 = `report.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 22673 strings out of 492982
- 440894 string characters out of 6138580
- 850720 words of memory out of 5000000
+ 22671 strings out of 492982
+ 440882 string characters out of 6138580
+ 849740 words of memory out of 5000000
  26041 multiletter control sequences out of 15000+600000
  536604 words of font info for 45 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1422,11 +1391,11 @@ Here is how much of TeX's memory you used:
 texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-dist/fon
 ts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public
 /amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cms
-y10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on report.pdf (13 pages, 2100163 bytes).
+y10.pfb>
+Output written on report.pdf (8 pages, 2083310 bytes).
 PDF statistics:
- 75 PDF objects out of 1000 (max. 8388607)
- 49 compressed objects within 1 object stream
+ 55 PDF objects out of 1000 (max. 8388607)
+ 35 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  21 words of extra memory for PDF output out of 10000 (max. 10000000)
 
