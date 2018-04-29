@@ -46,6 +46,7 @@ The sections to follow will outline the project details.  First, the Xenomai 3 R
 ~\indent Xenomai 3 is an RTOS developed by numerous engineers as an Free Software project for Linux machines (\cite{xenomai2018}).  It allowed for a versatile framework to be developed for real-time capabilities in Linux.  The RTOS provides an in-depth, detailed API for programmers to utilize when managing tasks.  In particular, several routines were used to create, initialize, schedule, and delete tasks.
 
 \indent Xenomai was responsible for creating the sensor reading tasks and scheduling them in a static, cyclic manner.  Both sensor tasks were scheduled with their respective periods.  Each was given a priority, and Xenomai scheduled them accordingly.  In the static, cyclic scheduling system, the priorities were statically decided and the schedule is known a priori.  This allowed Xenomai to determine the explicit schedule and have it planned, which reduced any overhead in the software.
+
 ~\newpage
 \section{Hardware Specifications}
 ~\indent The Raspberry Pi 3B was used in this project; its relevant specifications are listed in the table below.  Its processor and RAM were more than capable of the project's requirements, since the sensors were polled and there were only two of them.  Numerous input/output pins allowed multiple sensors to be wired up.
@@ -67,9 +68,10 @@ The sections to follow will outline the project details.  First, the Xenomai 3 R
 
 Both sensors were distributed in a kit by Sunfounder.  The rotary encoder has a resolution 20 cycles per revolution, which means that twenty electrically high pulses will be present on the square wave per revolution (\cite{artofcircuits2018}).  When the encoder is turned to the left, a "negative" turn is recorded; negative refers to a reverse turn in the software, and is represented as a decrement on the counter.  If it is turned to the right, then a positive turn is recorded.  
 
-~\newline
 \indent The DHT11 recorded both humidity and temperature characteristics.  Both readings have a 16-bit resolution.  The sampling period is more than two seconds, and was the determining factor in the scheduling of tasks in Xenomai. The data is retrieved after a brief set of delays that allow the bits to propagate into memory.  Once the data is in memory, its checksum is validated; bad data is discarded and results are defaulted to the previous reading while valid data is reported to the system, and the previous reading is updated to the fresh information.
 
+~\newline
+~\newline
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=10cm,height=10cm,keepaspectratio]{pi_GPIO.png}
@@ -77,13 +79,13 @@ Both sensors were distributed in a kit by Sunfounder.  The rotary encoder has a 
 	\label{fig:GPIO}
 \end{figure}
 
+~\newpage
 Above is an image that labels each numbered pin of the Raspberry Pi 3.
 The rotary encoder required five pins: 5V, GND, Clock, Data, and Switch.  Pins 5V and GND were attached to the top row, second and third pins (red and black). Clock was wired to GPIO 16, Data to GPIO 27, and Switch to GPIO 22.  These pins were denoted by the hardware; as it will be discussed, in software, the pins were referred to by a different numbering mechanism.
 
-~\newpage
 The figure below shows the system's configuration.
 Three pins were used for the DHT11: 5V, GND, and Data.  The 5V and GND signals were wired to the same pins as the rotary encoder through the use of a breadboard.  Data was wired to GPIO 23.  The following image shows the final setup of the system.
-
+~\newline
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=10cm,height=10cm,keepaspectratio]{circuit.jpg}
@@ -93,7 +95,7 @@ Three pins were used for the DHT11: 5V, GND, and Data.  The 5V and GND signals w
 
 ~\newline
 A third sensor, an infrared receiver, was considered for this project. It would have an ISR similar to the encoder and would be polled periodically for any new infrared detections. It had an inherent refresh delay of 600 ms (\cite{sunfounder2018}).  This delay proved to be too large when scheduling the other two sensors, and caused many missed deadlines.  As a result, no IR sensor was used in the project.
-~\newline
+~\newpage
 \section{Software Specifications}
 ~\indent The system's real-time constraints were considered before any software was developed.  Sunfounder, the sensors' distributor, provided several code examples on their Github account to test each sensor (\cite{sunfounder2018}).  These constraints were derived from examining their source code.
   
@@ -101,7 +103,8 @@ A third sensor, an infrared receiver, was considered for this project. It would 
 
 \indent For the rotary encoder, the latency was very short.  From Sunfounder's source code, there was no delay explicitly defined.  After experimenting with the sensor, it was possible to retrieve information every 5ms without issue.  Thus, any failure of the encoder was defined as not recording a reading within five milliseconds.
 
-These real-time constraints were modeled in UPPAAL for verification.  Below is a visual representation of this model. 
+These real-time constraints were modeled in UPPAAL for verification.  Below is a visual representation of this model.
+~\newline 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=10cm,height=10cm,keepaspectratio]{system.png}
@@ -110,6 +113,8 @@ These real-time constraints were modeled in UPPAAL for verification.  Below is a
 \end{figure}
 \indent One process represented the Raspberry Pi, with the encoder and DHT11 being additional processes.  First, the Raspberry Pi would request the encoder's data by signaling it along the giveEnc channel.  Upon receipt of this message, the encoder would enter an intermediate state with invariant of $x <= 5$; this modeled the latency in its operation.  If a fault occurred (i.e. $x == 5$), then a message on the noReply channel would be sent, the bad state would be entered and the Raspberry Pi would experience a failure.  Otherwise, the encoder sent data back to the Pi (via the info channel) and proceeded to a done state before resetting its local clock for the next request.  After receiving the encoder data, the Pi would ask the DHT11 for data by sending a message on the giveTemp channel.  The DHT11 functioned similarly to the encoder, but with a 1 second latency (100 time units).  If results were not available within one second, the sensor would report a fault on the noReply channel and enter a bad state.  Otherwise, it would send a reply on the info channel, enter a done state, and reset its local clock before awaiting the next poll from the Raspberry Pi.
 
+~\newline
+~\newline
 \indent Three queries were used to verify these characteristics.  First, $E <> Encode.x > 5$ would test for a failure with the encoder.  Next, $E <> HumiTemp.x > 100$ would test for DHT11 failures.  Finally, $A[] not System.BAD and not Encode.BAD and not HumiTemp.BAD$ tested for a system failure, with both sensors failing within the same reading cycle.  UPPAAL's verifier returned that each of these queries were satisfied, so the system had no faults that could occur.
 
 \begin{figure}[H]
@@ -119,12 +124,29 @@ These real-time constraints were modeled in UPPAAL for verification.  Below is a
 	\label{fig:pinouts}
 \end{figure}
 
-\indent Once hardware connections were established and real-time constraints were verified, the software needed to interface with each device.  This was made possible using the WiringPi library (\cite{gordonhenderson2018}).  The GPIO designations in Figure \ref{fig:GPIO} were not the same as WiringPi used.  Figure \ref{fig:pinouts} shows these obvious differences. The software refers to each pin by its WiringPi number.  For the rotary encoder, the Clock, Data, and Switch pins were referred to as pins 1, 2, and 3 respectively.  The DHT11's Data pin was denoted as pin 4.  WiringPi used these numbers to interface with the Raspberry Pi through wiringPiSetup().  This function initialized the system to use its numbering scheme and allowed the data to be accessed on those pins.  Additionally, wiringPiISR() was used to initialize the encoder's ISR, which was not run until the task was released for running.
+\indent Once hardware connections were established and real-time constraints were verified, the software needed to interface with each device.  This was made possible using the WiringPi library (\cite{gordonhenderson2018}).  The GPIO designations in Figure \ref{fig:GPIO} were not the same as WiringPi used.  Figure \ref{fig:pinouts} shows these obvious differences. The software refers to each pin by its WiringPi number.  For the rotary encoder, the Clock, Data, and Switch pins were referred to as pins 1, 2, and 3 respectively.  The DHT11's Data pin was denoted as pin 4.  WiringPi used these numbers to interface with the Raspberry Pi through wiringPiSetup().  This function initialized the system to use its numbering scheme and allowed the data to be accessed on those pins.  Additionally, wiringPiISR() was used to initialize the encoder's ISR, which was not run until the task was released for running. A summary of the wiring configuration is listed below.
+
+
+\begin{table}[hbt]
+	\centering
+	\caption{Summary of Hardware Pin Configuration}
+	\label{my-label}
+	\begin{tabular}{|c|c|c|}
+		\hline
+		\multicolumn{1}{|l|}{GPIO \#} & \multicolumn{1}{l|}{WiringPi \#} & \multicolumn{1}{l|}{Sensor Pin} \\ \hline
+		2                             & -                                & 5V                              \\ \hline
+		6                             & -                                & GND                             \\ \hline
+		18                            & 1                                & Encoder CLK                     \\ \hline
+		27                            & 2                                & Encoder DATA                    \\ \hline
+		22                            & 3                                & Encoder SW                      \\ \hline
+		23                            & 4                                & DHT11 Data                      \\ \hline
+	\end{tabular}
+\end{table}
 
 \indent Xenomai's API was utilized to create and initialize the tasks.  First, rt\textunderscore task\textunderscore create() was called to make each sensor reading a task: each was given a task object, the sensor name, a stack size, priority, and mode (\cite{xenomai2018}).  The stack size and mode were set to their defaults (0, 0), and the DHT11 was given a higher priority than the encoder due to its significantly higher delay time; since the encoder had less complex data than the DHT11, it was deemed not as important.  After task creation, each task was started by rt\textunderscore task\textunderscore start(), which was given the task, its function starting point, and any arguments (\cite{xenomai2018}).  The arguments were the default setting of 0; DHT11's starting point was the read\textunderscore temp() function, and the encoder started within its ISR, read\textunderscore encoder().
 
 \indent Within the starting functions, two additional Xenomai routines were used to ensure periodic scheduling: rt\textunderscore task\textunderscore set\textunderscore periodic() and rt\textunderscore task\textunderscore wait\textunderscore period().  First, the task was set to be periodic with a given period starting at sensor task's invocation, defined as the constant TM\textunderscore NOW (\cite{xenomai2018}).  These periods were defined in nanoseconds, as the period must be converted to ticks via rt\textunderscore timer\textunderscore ns2ticks() (\cite{xenomai2018}).  As a result, the encoder's period was \SI{5e6} ns and the DHT11's was \SI{1e8} ns.  After making each task periodic, its code segment would run.  Following this, the sensors would be put to sleep (by using rt\textunderscore task\textunderscore wait\textunderscore period() to wait) until their next scheduled time slot, which is when Xenomai would schedule the re-execution of this cycle.
-~\newpage
+
 \section{Experimental Results}
 ~\indent Scheduling tasks via the Xenomai routines was simple and effective.  Every tenth of a second, the DHT11 would output the current temperature and humidity measurements.  Meanwhile, the encoder's ISR would be run every 5ms without failure and report changes it detected.  If the DHT11's period was reduced below one tenth of a second, then the scheduler would fail to meet the deadlines and report a communication error.  Similarly, the encoder would throw the error if reduced below a 5ms period.  
 
