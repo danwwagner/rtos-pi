@@ -140,7 +140,7 @@ These real-time constraints were modeled in UPPAAL for verification.  Below is a
 \end{figure}
 \indent One process represented the Raspberry Pi, with the encoder and DHT11 being additional processes.  First, the Raspberry Pi would request the encoder's data by signaling it along the giveEnc channel.  Upon receipt of this message, the encoder would enter an intermediate state with invariant of $x <= 5$; this modeled the latency in its operation.  If a fault occurred (i.e. $x == 5$), then a message on the noReply channel would be sent, the bad state would be entered and the Raspberry Pi would experience a failure.  Otherwise, the encoder sent data back to the Pi (via the info channel) and proceeded to a done state before resetting its local clock for the next request.  After receiving the encoder data, the Pi would ask the DHT11 for data by sending a message on the giveTemp channel.  The DHT11 functioned similarly to the encoder, but with a 1 second latency (100 time units).  If results were not available within one second, the sensor would report a fault on the noReply channel and enter a bad state.  Otherwise, it would send a reply on the info channel, enter a done state, and reset its local clock before awaiting the next poll from the Raspberry Pi.
 
-\indent Three queries were used to verify these characteristics.  First, $E <> Encode.x > 5$ would test for a failure with the encoder.  Next, $E <> HumiTemp.x > 100$ would test for DHT11 failures.  Finally, $A[] not System.BAD and not Encode.BAD and not HumiTemp.BAD$ tested for a system failure, with both sensors failing within the same reading cycle.  UPPAAL's verifier returned that each of these queries were satisfied, so the system had no faults that could occur.
+\indent Three queries were used to verify these characteristics.  First, $A[]$ $Encode.x > 5$ would test for a failure with the encoder.  Next, $A []$ $HumiTemp.x > 100$ would test for DHT11 failures.  Finally, $A[\space]$  $ not $ $System.BAD$ $and $ $not $ $Encode.BAD$ $and$ $not$ $HumiTemp.BAD$ tested for a system failure, with both sensors failing within the same reading cycle.  UPPAAL's verifier satisfied the final condition, and found the first two queries unsatisfied, which translates to a successful, fault-tolerant system.
 
 \begin{figure}[H]
 	\centering
@@ -182,7 +182,7 @@ These real-time constraints were modeled in UPPAAL for verification.  Below is a
 ~\newpage
 \printbibliography
 ~\newpage
-%\section{Source Code}
-%\verbatiminput{project.c}
+\section{Source Code}
+\verbatiminput{project.c}
 
 \end{document}

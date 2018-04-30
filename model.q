@@ -3,12 +3,12 @@
 /*
 
 */
-E<> Encode.x > 5
+A[] Encode.x > 5
 
 /*
 
 */
-E<> HumiTemp.x > 100
+A[] HumiTemp.x > 100
 
 /*
 
