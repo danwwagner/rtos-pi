@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2018.3.7)  29 APR 2018 17:02
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2018.3.7)  29 APR 2018 19:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1350,55 +1350,92 @@ Underfull \hbox (badness 10000) in paragraph at lines 42--44
  []
 
 [1]
-<pi_GPIO.png, id=11, 536.0025pt x 181.67876pt>
-File: pi_GPIO.png Graphic file (type png)
-<use pi_GPIO.png>
-Package pdftex.def Info: pi_GPIO.png  used on input line 77.
-(pdftex.def)             Requested size: 284.52162pt x 96.43896pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 73--80
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 73--80
-
- []
-
-[2 <./pi_GPIO.png>]
-<circuit.jpg, id=15, 4047.12pt x 3035.34pt>
-File: circuit.jpg Graphic file (type jpg)
-<use circuit.jpg>
-Package pdftex.def Info: circuit.jpg  used on input line 91.
+<raspberry_pi.jpg, id=11, 4047.12pt x 3035.34pt>
+File: raspberry_pi.jpg Graphic file (type jpg)
+<use raspberry_pi.jpg>
+Package pdftex.def Info: raspberry_pi.jpg  used on input line 57.
 (pdftex.def)             Requested size: 284.50067pt x 213.3755pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 86--94
+Underfull \hbox (badness 10000) in paragraph at lines 54--60
 
  []
 
-[3 <./circuit.jpg>]
-<system.png, id=19, 869.2475pt x 300.12125pt>
+[2 <./raspberry_pi.jpg>]
+<pi_GPIO.png, id=15, 536.0025pt x 181.67876pt>
+File: pi_GPIO.png Graphic file (type png)
+<use pi_GPIO.png>
+Package pdftex.def Info: pi_GPIO.png  used on input line 86.
+(pdftex.def)             Requested size: 284.52162pt x 96.43896pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 82--89
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 82--89
+
+ []
+
+<circuit.jpg, id=16, 4047.12pt x 3035.34pt>
+File: circuit.jpg Graphic file (type jpg)
+<use circuit.jpg>
+Package pdftex.def Info: circuit.jpg  used on input line 99.
+(pdftex.def)             Requested size: 227.56348pt x 170.6726pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 94--102
+
+ []
+
+<infrared.jpg, id=17, 4047.12pt x 3035.34pt>
+File: infrared.jpg Graphic file (type jpg)
+<use infrared.jpg>
+Package pdftex.def Info: infrared.jpg  used on input line 108.
+(pdftex.def)             Requested size: 284.50067pt x 213.3755pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 104--111
+
+ []
+
+[3 <./pi_GPIO.png> <./circuit.jpg>]
+<humitemp.jpg, id=21, 4047.12pt x 3035.34pt>
+File: humitemp.jpg Graphic file (type jpg)
+<use humitemp.jpg>
+Package pdftex.def Info: humitemp.jpg  used on input line 120.
+(pdftex.def)             Requested size: 284.50067pt x 213.3755pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 116--123
+
+ []
+
+[4 <./infrared.jpg>]
+<encoder.jpg, id=25, 4047.12pt x 3035.34pt>
+File: encoder.jpg Graphic file (type jpg)
+<use encoder.jpg>
+Package pdftex.def Info: encoder.jpg  used on input line 129.
+(pdftex.def)             Requested size: 284.50067pt x 213.3755pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 124--132
+
+ []
+
+<system.png, id=26, 869.2475pt x 300.12125pt>
 File: system.png Graphic file (type png)
 <use system.png>
-Package pdftex.def Info: system.png  used on input line 110.
+Package pdftex.def Info: system.png  used on input line 137.
 (pdftex.def)             Requested size: 284.53142pt x 98.2389pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 106--113
+Underfull \hbox (badness 10000) in paragraph at lines 133--140
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 116--119
-
- []
-
-[4 <./system.png>]
-<pi_pins.png, id=24, 611.28375pt x 313.17pt>
+[5 <./humitemp.jpg> <./encoder.jpg>]
+<pi_pins.png, id=30, 611.28375pt x 313.17pt>
 File: pi_pins.png Graphic file (type png)
 <use pi_pins.png>
-Package pdftex.def Info: pi_pins.png  used on input line 122.
+Package pdftex.def Info: pi_pins.png  used on input line 147.
 (pdftex.def)             Requested size: 284.52382pt x 145.76588pt.
- [5 <./pi_pins.png>] [6] [7] (./report.aux)
+ [6 <./system.png> <./pi_pins.png>]
+[7] [8] [9] (./report.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
@@ -1407,22 +1444,22 @@ Package logreq Info: Writing requests to 'report.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 22671 strings out of 492982
- 440882 string characters out of 6138580
- 849783 words of memory out of 5000000
- 26041 multiletter control sequences out of 15000+600000
+ 22695 strings out of 492982
+ 441263 string characters out of 6138580
+ 849811 words of memory out of 5000000
+ 26061 multiletter control sequences out of 15000+600000
  536604 words of font info for 45 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 49i,9n,45p,10390b,1839s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 49i,8n,45p,10390b,1839s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-dist/fon
 ts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public
 /amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cms
 y10.pfb>
-Output written on report.pdf (8 pages, 2084254 bytes).
+Output written on report.pdf (10 pages, 6940597 bytes).
 PDF statistics:
- 55 PDF objects out of 1000 (max. 8388607)
- 35 compressed objects within 1 object stream
+ 65 PDF objects out of 1000 (max. 8388607)
+ 39 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 21 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 41 words of extra memory for PDF output out of 10000 (max. 10000000)
 
