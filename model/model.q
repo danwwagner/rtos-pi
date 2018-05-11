@@ -3,14 +3,14 @@
 /*
 
 */
-A[] Encode.x > 5
+A[] not Encode.BAD
 
 /*
 
 */
-A[] HumiTemp.x > 100
+A[] not HumiTemp.BAD
 
 /*
 
 */
-A[] not System.BAD and not Encode.BAD and not HumiTemp.BAD
+A[] not System.BAD
